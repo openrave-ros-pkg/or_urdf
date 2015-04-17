@@ -420,7 +420,7 @@ std::pair<OpenRAVE::KinBody::JointType, bool> URDFJointTypeToRaveJointType(int t
             // Create a group dedicated to visual geometry for or_rviz.
             OpenRAVE::KinBody::GeometryInfoPtr geom_info_clone
                 = boost::make_shared<OpenRAVE::KinBody::GeometryInfo>(*geom_info);
-            link_info->_mapExtraGeometries["visual"].push_back(geom_info_clone);
+            //link_info->_mapExtraGeometries["visual"].push_back(geom_info_clone);
             break;
         }
 
@@ -432,8 +432,8 @@ std::pair<OpenRAVE::KinBody::JointType, bool> URDFJointTypeToRaveJointType(int t
       // Verify that the "visual" and "spheres" groups always exist. Recall 
       // that accessing an element with operator[] creates it using the default
       // no-arg constructor if it does not already exist.
-      link_info->_mapExtraGeometries["visual"];
-      link_info->_mapExtraGeometries["spheres"];
+      //link_info->_mapExtraGeometries["visual"];
+      //link_info->_mapExtraGeometries["spheres"];
       link_infos.push_back(link_info);
     }
 
@@ -657,7 +657,7 @@ void URDFLoader::ParseSRDF(urdf::Model const &urdf, srdf::Model const &srdf,
         manip_info->_name = manip_group.name_;
         manip_info->_sBaseLinkName = manip_root_link->name;
         manip_info->_vdirection = OpenRAVE::Vector(0, 0, 1);
-        manip_info->_vChuckingDirection.resize(gripper_joints.size(), 0.0);
+        //manip_info->_vChuckingDirection.resize(gripper_joints.size(), 0.0);
         manip_info->_sEffectorLinkName = ee_root_link->_name;
 
         BOOST_FOREACH (JointConstPtr joint, gripper_joints) {
@@ -695,7 +695,7 @@ void URDFLoader::ParseSRDF(urdf::Model const &urdf, srdf::Model const &srdf,
             = URDFPoseToRaveTransform(collision->origin);
 
         // Add the spheres to a separate collision group.
-        std::vector<OpenRAVE::KinBody::GeometryInfoPtr> &sphere_infos
+        /*std::vector<OpenRAVE::KinBody::GeometryInfoPtr> &sphere_infos
                 = link_info->_mapExtraGeometries["spheres"];
         BOOST_FOREACH (srdf::Model::Sphere const &sphere, spheres.spheres_) {
             // TODO: Spheres should be in the collision frame.
@@ -708,7 +708,7 @@ void URDFLoader::ParseSRDF(urdf::Model const &urdf, srdf::Model const &srdf,
             sphere_info->_t.trans = collision_transform * OpenRAVE::Vector(
                     sphere.center_x_, sphere.center_y_, sphere.center_z_);
             sphere_infos.push_back(sphere_info);
-        }
+        }*/
     }
 }
   
